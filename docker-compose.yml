@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'product'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '0510'
+      MYSQL_ROOT_PASSWORD: '0510'
+    ports:
+      - '3317:3306'
+    expose:
+      - '3317'
+    volumes:
+      - my-db:/var/lib/mysql
+# Names our volume
+volumes:
+  my-db:
+
+
