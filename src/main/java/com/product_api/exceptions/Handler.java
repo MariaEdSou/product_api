@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -42,21 +43,25 @@ public class Handler {
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseErrorDTO handlingResponseStatusException(ResponseStatusException exception) {
+    public ResponseEntity<ResponseErrorDTO> handlingResponseStatusException(ResponseStatusException exception) {
         log.error("Error {}", exception.getReason());
-        return ResponseErrorDTO.builder()
+        return ResponseEntity
+                .status(exception.getStatusCode())
+                .body(ResponseErrorDTO.builder()
                 .code(exception.getStatusCode())
                 .message(exception.getMessage())
-                .build();
+                .build());
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseErrorDTO handlingExceptionGlobal(BusinessException exception) {
+    public ResponseEntity <ResponseErrorDTO> handlingExceptionGlobal(BusinessException exception) {
         log.error("Error {}", exception.getMessage());
-        return ResponseErrorDTO.builder()
+        return ResponseEntity
+                .status(exception.getStatusCode())
+                .body(ResponseErrorDTO.builder()
                 .code(exception.getStatusCode())
                 .message(exception.getMessage())
-                .build();
+                .build());
     }
 
     @ResponseStatus(INTERNAL_SERVER_ERROR)

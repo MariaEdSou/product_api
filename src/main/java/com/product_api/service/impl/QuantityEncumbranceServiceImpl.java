@@ -7,6 +7,7 @@ import com.product_api.repository.ProductModelRepository;
 import com.product_api.service.QuantityEncumbranceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class QuantityEncumbranceServiceImpl implements QuantityEncumbranceServic
                 repository.save(product);
                 log.info("CHANGED QUANTITY, {} ", product.getStock_quantity());
             }
-        });
+            else {
+            throw new BusinessException(HttpStatus.UNPROCESSABLE_ENTITY, "DO NOT HAVE THIS QUANTITY IN STOCK: PRODUCT ID " + productDTO.getProductId());
+        }});
     }
 }
+
