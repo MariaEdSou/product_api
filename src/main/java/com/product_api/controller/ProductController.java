@@ -33,9 +33,6 @@ public class ProductController {
 
     @Autowired
     QuantityEncumbranceService quantityService;
-    @Autowired
-    private ProductModelRepository productModelRepository;
-
 
     @PostMapping
     public ResponseEntity<Void> post(@RequestBody @Valid final ProductRequestDTO dto)
@@ -60,7 +57,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ProductRequestUpdateDTO dto) {
         updateService.updateProduct(id, dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 

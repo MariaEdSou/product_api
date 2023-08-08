@@ -23,7 +23,7 @@ public class DeleteProductServiceImpl implements DeleteProductService {
                         () -> {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "PRODUCT ID NOT FOUND");
                 });
-        log.info("PRODUCT DELETED");
+        log.info("PRODUCT DELETED ID: {}", id);
 
     }
 }
