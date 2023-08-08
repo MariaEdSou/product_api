@@ -4,13 +4,11 @@ import com.product_api.dto.ProductInformationRequestDTO;
 import com.product_api.dto.ProductRequestDTO;
 import com.product_api.dto.ProductRequestUpdateDTO;
 import com.product_api.dto.ProductResponseDTO;
-import com.product_api.repository.ProductModelRepository;
 import com.product_api.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
